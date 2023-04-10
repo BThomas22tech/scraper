@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import TimeoutException
 #specify driver path
 DRIVER_PATH = 'Users\muckr\OneDrive\Documents\chromedriver'
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -29,3 +30,21 @@ location.send_keys(['Nashville'])
 
 search_button = driver.find_element(By.XPATH,'//*[@id="jobsearch"]/button')
 search_button.click()
+
+
+titles =[]
+companies = []
+descriptions = []
+wait = WebDriverWait(driver, 10)
+job_cards = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "jobCard_mainContent")))
+for i in range(10):
+
+
+    for card in job_cards:
+        try:
+            title = card.find_element(By.CSS_SELECTOR, '.jcs-JobTitle').text
+        except:
+            title = "None"
+        titles.append(title)
+
+print("Title:", titles)
