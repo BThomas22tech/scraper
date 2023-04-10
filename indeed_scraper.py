@@ -74,6 +74,6 @@ with open('jobdata.csv','a',newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Title', 'Company', 'Salary'])
     for job in jobs:
-        writer.writerow([job['title'],job['company'],job['salary']])
+        writer.writerow([job['title'],job['company'],job['salary']+ '\n'])
         # print(f'Title: {title}\nCompany: {company}\nSalary: {salary}\n')
 
